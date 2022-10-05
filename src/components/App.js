@@ -10,6 +10,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Movies />} />
+        {/* <Route path="" element={<Sections />} /> */}
       </Routes>
     </BrowserRouter>
   )
