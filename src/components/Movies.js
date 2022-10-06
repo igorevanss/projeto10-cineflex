@@ -30,7 +30,7 @@ export default function Movies() {
       <MovieContainer>
         {items.map((item, index) => (
           <Movie key={index}>
-            <Link to={`/sessoes`}>
+            <Link to={`/sessoes/${item.id}`}>
               <img src={item.posterURL} alt="Filme" />
             </Link>
           </Movie>

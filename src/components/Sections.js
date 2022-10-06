@@ -1,37 +1,45 @@
 import styled from 'styled-components'
 import Footer from './Footer'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 export default function Sections() {
+
+  const [sections, setSections] = useState([])
+
+  const {idFilme} =useParams()
+  console.log(idFilme)
+  useEffect(() => {
+    const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
+
+    promise.then(res => setSections(res.data))
+    promise.catch(err => console.log(err))
+
+  }, [])
+  
+
   return (
     <>
     <SectionsContainer>
       <h3>Selecione o horário</h3>
       <div>
-        <Schedule>
-          <p>Quinta-feira - 24/06/2021</p>
+      {Array.isArray(sections.days) && sections.days.map((section) => (
+        <Schedule key={section.id}>
+          <p>{section.weekday},{section.date}</p>
           <Hours>
-          <Link to="/assentos" style={{ textDecoration: 'none' }}>
+            {section.showtimes.map((showtime) =>(
+              <Link key={showtime.id} to="/assentos" style={{ textDecoration: 'none' }}>
             <div>
-              <p>15:00</p>
+              <p>{showtime.name}</p>
             </div>
             </Link>
-            <div>
-              <p>19:00</p>
-            </div>
+            ))}
+
           </Hours>
         </Schedule>
-        <Schedule>
-          <p>Sexta-feira - 25/06/2021</p>
-          <Hours>
-            <div>
-              <p>15:00</p>
-            </div>
-            <div>
-              <p>19:00</p>
-            </div>
-          </Hours>
-        </Schedule>
+      ))}
+
       </div>
     </SectionsContainer>
     <Footer />

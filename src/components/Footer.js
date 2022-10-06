@@ -1,13 +1,14 @@
 import styled from 'styled-components'
+import Sections from './Sections'
 
 export default function Footer() {
   return (
     <FooterContainer>
       <div>
-        <img src="" alt="capa do filme" />
+        <img src={Sections.posterURL} alt="capa do filme" />
       </div>
       <div>
-      <p>Nome do Filme</p>
+      <p>{Sections.title}</p>
       <p></p>
       </div>
     </FooterContainer>

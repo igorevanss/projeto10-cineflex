@@ -13,7 +13,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Movies />} />
-        <Route path="/sessoes" element={<Sections />} />
+        <Route path="/sessoes/:idFilme" element={<Sections />} />
         <Route path="/assentos" element={<Seats />} />
         <Route path="/sucesso" element={<Success />} />
       </Routes>
