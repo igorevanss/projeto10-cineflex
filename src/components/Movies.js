@@ -52,7 +52,6 @@ const MovieContainer = styled.div`
   justify-content: center;
   gap: 30px;
 `
-
 const Movie = styled.div`
   width: 145px;
   height: 209px;

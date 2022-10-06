@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export default function Success() {
   return (
@@ -29,9 +30,11 @@ export default function Success() {
           </p>
         </div>
       </PurchaserData>
+      <Link to="/">
       <button>
         <p>Voltar pra Home</p>
       </button>
+      </Link>
     </SuccessContainer>
   )
 }

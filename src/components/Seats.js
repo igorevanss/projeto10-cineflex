@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import Footer from './Footer'
 import { Link } from 'react-router-dom'
 
-
 export default function Seats() {
   return (
     <>
@@ -70,7 +69,7 @@ export default function Seats() {
             <input type="text" placeholder="Digite seu CPF..." />
           </div>
         </Inputs>
-        <Link to="/sussesso">
+        <Link to="/sucesso">
         <button type="submit" name="cancel" value="Cancel">
           <p>Reservar assento(s)</p>
         </button>

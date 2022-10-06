@@ -6,7 +6,6 @@ import Seats from './Seats'
 import Sections from './Sections'
 import Success from './Success'
 
-
 export default function App() {
   return (
     <BrowserRouter>
@@ -16,7 +15,7 @@ export default function App() {
         <Route path="/" element={<Movies />} />
         <Route path="/sessoes" element={<Sections />} />
         <Route path="/assentos" element={<Seats />} />
-        <Route path="/sussesso" element={<Success />} />
+        <Route path="/sucesso" element={<Success />} />
       </Routes>
     </BrowserRouter>
   )
