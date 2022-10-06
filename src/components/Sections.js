@@ -1,7 +1,9 @@
 import styled from 'styled-components'
+import Footer from './Footer'
 
 export default function Sections() {
   return (
+    <>
     <SectionsContainer>
       <h3>Selecione o horário</h3>
       <div>
@@ -29,6 +31,8 @@ export default function Sections() {
         </Schedule>
       </div>
     </SectionsContainer>
+    <Footer />
+    </>
   )
 }
 
@@ -51,6 +55,7 @@ const Schedule = styled.div`
 const Hours = styled.div`
   display: flex;
   margin-bottom: 22px;
+  gap: 8px;
 
   div {
     width: 83px;
