@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Footer from './Footer'
+import { Link } from 'react-router-dom'
 
 export default function Sections() {
   return (
@@ -10,9 +11,11 @@ export default function Sections() {
         <Schedule>
           <p>Quinta-feira - 24/06/2021</p>
           <Hours>
+          <Link to="/assentos" style={{ textDecoration: 'none' }}>
             <div>
               <p>15:00</p>
             </div>
+            </Link>
             <div>
               <p>19:00</p>
             </div>
