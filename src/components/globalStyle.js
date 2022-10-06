@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
- 
+
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -44,9 +44,22 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+${'' /* General styles */}
+
 * {
 	box-sizing: border-box;
 }
+h3 {
+		margin-top: 110px;
+    margin-bottom: 36px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    color: #293845;
+		text-align: center;
+  }
 `
- 
+
 export default GlobalStyle

@@ -41,20 +41,10 @@ export default function Movies() {
 }
 
 const MoviesContainer = styled.div`
-  margin-top: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-
-  h3 {
-    margin-bottom: 36px;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    color: #293845;
-  }
 `
 const MovieContainer = styled.div`
   display: flex;
