@@ -21,7 +21,7 @@ export default function Movies() {
   }, [])
 
   if (items.length === 0) {
-    return <img src="loading.gif" />
+    return <p>Carregando...</p>
   }
 
   return (
