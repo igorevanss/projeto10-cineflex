@@ -6,15 +6,25 @@ import axios from 'axios'
 
 export default function Seats() {
   const [seats, setSeats] = useState([])
-  // const [isfree, setIsFree] = useState()
+  const [selected, setSelected] = useState([])
 
-  // function changeColor(free){
-  //   if(free === true) {
-  //     setIsFree(!true)
-  //   } else {
-  //     alert("Esse assento não está disponível")
-  //   }
-  // }
+  function changeColor(seatClicked) {
+    console.log(seatClicked)
+    console.log(selected)
+
+    if (!seatClicked.isAvailable) {
+      alert('Este assento não está disponível')
+      return
+    }
+
+    if (selected.includes(seatClicked.id)){
+      const clicked = selected.filter(id => id !== seatClicked.id)
+      setSelected(clicked)
+      return
+    }
+
+    setSelected([...selected, seatClicked.id])
+  }
 
   const { idSessao } = useParams()
 
@@ -32,11 +42,17 @@ export default function Seats() {
       <h3>Selecione o(s) assento(s)</h3>
       <SeatsContainer>
         <SeatContainer>
-          {Array.isArray(seats.seats) && seats.seats.map((seat) => (
-            <div key={seat.id} onClick={"() => changeColor(seat.isAvailable)"}>
-              <p>{seat.name}</p>
-            </div>
-          ))}
+          {Array.isArray(seats.seats) &&
+            seats.seats.map(seat => (
+              <div
+                //style={!seat.isAvailable ? { backgroundColor: 'red' } : null}
+                style={selected.includes(seat.id) ? { backgroundColor: 'green' } : null}
+                key={seat.id}
+                onClick={() => changeColor(seat)}
+              >
+                <p>{seat.name}</p>
+              </div>
+            ))}
         </SeatContainer>
         <SeatsInfos>
           <div>
@@ -53,16 +69,16 @@ export default function Seats() {
           </div>
         </SeatsInfos>
         <form>
-        <Inputs>
-          <div>
-            <p>Nome do comprador:</p>
-            <input type="text" placeholder="Digite seu nome..." />
-          </div>
-          <div>
-            <p>CPF do comprador:</p>
-            <input type="text" placeholder="Digite seu CPF..." />
-          </div>
-        </Inputs>
+          <Inputs>
+            <div>
+              <p>Nome do comprador:</p>
+              <input type="text" placeholder="Digite seu nome..." />
+            </div>
+            <div>
+              <p>CPF do comprador:</p>
+              <input type="text" placeholder="Digite seu CPF..." />
+            </div>
+          </Inputs>
         </form>
         <Link to="/sucesso">
           <button type="submit" name="submit">
@@ -70,7 +86,15 @@ export default function Seats() {
           </button>
         </Link>
       </SeatsContainer>
-      <Footer />
+      {seats.movie ? (
+        <Footer
+          sections={seats.movie}
+          hourday={seats.name}
+          weekday={seats.day.weekday}
+        />
+      ) : (
+        ''
+      )}
     </>
   )
 }

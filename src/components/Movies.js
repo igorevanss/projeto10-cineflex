@@ -4,15 +4,15 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 
 export default function Movies() {
-  const [items, setItems] = useState([])
+  const [movies, setMovies] = useState([])
 
   useEffect(() => {
     const promise = axios.get(
-      'https://mock-api.driven.com.br/api/v8/cineflex/movies'
+      'https://mock-api.driven.com.br/api/v5/cineflex/movies'
     )
 
     promise.then(res => {
-      setItems(res.data)
+      setMovies(res.data)
     })
 
     promise.catch(err => {
@@ -20,7 +20,7 @@ export default function Movies() {
     })
   }, [])
 
-  if (items.length === 0) {
+  if (movies.length === 0) {
     return <p>Carregando...</p>
   }
 
@@ -28,10 +28,10 @@ export default function Movies() {
     <MoviesContainer>
       <h3>Selecione o filme</h3>
       <MovieContainer>
-        {items.map((item, index) => (
+        {movies.map((movie, index) => (
           <Movie key={index}>
-            <Link to={`/sessoes/${item.id}`}>
-              <img src={item.posterURL} alt="Filme" />
+            <Link to={`/sessoes/${movie.id}`}>
+              <img src={movie.posterURL} alt="Filme" />
             </Link>
           </Movie>
         ))}

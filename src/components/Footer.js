@@ -1,15 +1,21 @@
 import styled from 'styled-components'
 import Sections from './Sections'
 
-export default function Footer() {
+export default function Footer({ sections, hourday, weekday }) {
   return (
     <FooterContainer>
       <div>
-        <img src={Sections.posterURL} alt="capa do filme" />
+        <img src={sections.posterURL} alt="capa do filme" />
       </div>
       <div>
-      <p>{Sections.title}</p>
-      <p></p>
+        <p>{sections.title}</p>
+        {hourday ? (
+          <p>
+            {weekday} - {hourday}
+          </p>
+        ) : (
+          ''
+        )}
       </div>
     </FooterContainer>
   )

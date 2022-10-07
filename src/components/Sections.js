@@ -6,6 +6,7 @@ import axios from 'axios'
 
 export default function Sections() {
 
+
   const [sections, setSections] = useState([])
 
   const {idFilme} =useParams()
@@ -13,7 +14,10 @@ export default function Sections() {
   useEffect(() => {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
 
-    promise.then(res => setSections(res.data))
+    promise.then(res => {
+      setSections(res.data)
+      console.log(res.data)
+    })
     promise.catch(err => console.log(err))
 
   }, [])
@@ -42,7 +46,7 @@ export default function Sections() {
 
       </div>
     </SectionsContainer>
-    <Footer />
+    <Footer sections={sections}/>
     </>
   )
 }
