@@ -1,49 +1,42 @@
 import styled from 'styled-components'
 import Footer from './Footer'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 export default function Seats() {
+  const [seats, setSeats] = useState([])
+  // const [isfree, setIsFree] = useState()
+
+  // function changeColor(free){
+  //   if(free === true) {
+  //     setIsFree(!true)
+  //   } else {
+  //     alert("Esse assento não está disponível")
+  //   }
+  // }
+
+  const { idSessao } = useParams()
+
+  useEffect(() => {
+    const promise = axios.get(
+      `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`
+    )
+
+    promise.then(res => setSeats(res.data))
+    promise.catch(err => console.log(err))
+  }, [])
+
   return (
     <>
       <h3>Selecione o(s) assento(s)</h3>
       <SeatsContainer>
         <SeatContainer>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
-          <div>
-            <p>15</p>
-          </div>
+          {Array.isArray(seats.seats) && seats.seats.map((seat) => (
+            <div key={seat.id} onClick={"() => changeColor(seat.isAvailable)"}>
+              <p>{seat.name}</p>
+            </div>
+          ))}
         </SeatContainer>
         <SeatsInfos>
           <div>
@@ -59,6 +52,7 @@ export default function Seats() {
             <p>Indisponível</p>
           </div>
         </SeatsInfos>
+        <form>
         <Inputs>
           <div>
             <p>Nome do comprador:</p>
@@ -69,10 +63,11 @@ export default function Seats() {
             <input type="text" placeholder="Digite seu CPF..." />
           </div>
         </Inputs>
+        </form>
         <Link to="/sucesso">
-        <button type="submit" name="cancel" value="Cancel">
-          <p>Reservar assento(s)</p>
-        </button>
+          <button type="submit" name="submit">
+            <p>Reservar assento(s)</p>
+          </button>
         </Link>
       </SeatsContainer>
       <Footer />

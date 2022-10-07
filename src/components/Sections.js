@@ -9,7 +9,7 @@ export default function Sections() {
   const [sections, setSections] = useState([])
 
   const {idFilme} =useParams()
-  console.log(idFilme)
+  
   useEffect(() => {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
 
@@ -26,10 +26,10 @@ export default function Sections() {
       <div>
       {Array.isArray(sections.days) && sections.days.map((section) => (
         <Schedule key={section.id}>
-          <p>{section.weekday},{section.date}</p>
+          <p>{section.weekday} - {section.date}</p>
           <Hours>
             {section.showtimes.map((showtime) =>(
-              <Link key={showtime.id} to="/assentos" style={{ textDecoration: 'none' }}>
+              <Link key={showtime.id} to={`/assentos/${showtime.id}`} style={{ textDecoration: 'none' }}>
             <div>
               <p>{showtime.name}</p>
             </div>
