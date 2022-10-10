@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import PurchaserInfo from './PurchaserInfo'
+import BackIcon from './BackIcon'
 
 function Seat(props) {
   const { seat, id, name, availability, selected, changeColor } = props
@@ -70,6 +71,7 @@ export default function Seats({setAllInfo, allInfo}) {
 
   return (
     <>
+    <BackIcon />
       <h3>Selecione o(s) assento(s)</h3>
       <SeatsContainer>
         <SeatContainer>

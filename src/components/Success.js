@@ -26,7 +26,7 @@ export default function Success({ allInfo, setAllInfo }) {
         <div>
           <h4>Ingressos</h4>
           {allInfo.seats.map(s => (
-            <p>Assento {s}</p>
+            <p key={s}> Assento {s}</p>
           ))}
         </div>
         <div>

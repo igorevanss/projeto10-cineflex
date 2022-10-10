@@ -3,6 +3,7 @@ import Footer from './Footer'
 import { Link, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import BackIcon from './BackIcon'
 
 export default function Sections() {
 
@@ -24,6 +25,7 @@ export default function Sections() {
 
   return (
     <>
+    <BackIcon />
     <SectionsContainer>
       <h3>Selecione o horário</h3>
       <div>
