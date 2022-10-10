@@ -53,8 +53,6 @@ export default function Seats({setAllInfo, allInfo}) {
     setSeatNumber([...seatNumber, seatClicked.name ])
   }
 
-  console.log('informações', allInfo)
-
   const { idSessao } = useParams()
 
   useEffect(() => {
@@ -66,8 +64,6 @@ export default function Seats({setAllInfo, allInfo}) {
     setAllInfo({...allInfo, movie: res.data.movie.title, day: res.data.day.date, time: res.data.name})})
     promise.catch(err => console.log(err))
   }, [])
-
-  console.log(seats)
 
   return (
     <>

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
+import BackIcon from './BackIcon'
 
 export default function Success({ allInfo, setAllInfo }) {
 
@@ -9,9 +10,9 @@ export default function Success({ allInfo, setAllInfo }) {
     setAllInfo([])
     navigate('/')
   }
-  console.log(allInfo)
   return (
     <SuccessContainer>
+    <BackIcon />
       <h2>
         Pedido feito <br /> com sucesso!
       </h2>

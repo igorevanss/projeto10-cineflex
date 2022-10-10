@@ -15,7 +15,6 @@ export default function PurchaserInfo(props) {
 
   function success() {
     setAllInfo({ ...allInfo, cpf: cpf, name: name })
-    console.log(allInfo)
     navigate('/sucesso')
   }
 

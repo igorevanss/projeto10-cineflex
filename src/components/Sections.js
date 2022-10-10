@@ -16,7 +16,6 @@ export default function Sections() {
 
     promise.then(res => {
       setSections(res.data)
-      console.log(res.data)
     })
     promise.catch(err => console.log(err))
 
