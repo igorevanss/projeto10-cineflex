@@ -1,7 +1,15 @@
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-export default function Success() {
+export default function Success({ allInfo, setAllInfo }) {
+
+  let navigate = useNavigate()
+
+  function backHomeScreen(){
+    setAllInfo([])
+    navigate('/')
+  }
+  console.log(allInfo)
   return (
     <SuccessContainer>
       <h2>
@@ -11,29 +19,28 @@ export default function Success() {
         <div>
           <h4>Filme e sessão</h4>
           <p>
-            Enola Holmes <br />
-            24/06/2021 15:00
+            {allInfo.movie} <br />
+            {allInfo.day} {allInfo.time}
           </p>
         </div>
         <div>
           <h4>Ingressos</h4>
-          <p>
-            Assento 15 <br />
-            Assento 16
-          </p>
+          {allInfo.seats.map(s => (
+            <p>Assento {s}</p>
+          ))}
         </div>
         <div>
           <h4>Comprador</h4>
           <p>
-            Nome: João da Silva Sauro <br />
-            CPF: 123.456.789-10
+            Nome: {allInfo.name} <br />
+            CPF: {allInfo.cpf}
           </p>
         </div>
       </PurchaserData>
       <Link to="/">
-      <button>
-        <p>Voltar pra Home</p>
-      </button>
+        <button onClick={backHomeScreen}>
+          <p>Voltar pra Home</p>
+        </button>
       </Link>
     </SuccessContainer>
   )

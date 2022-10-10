@@ -9,8 +9,13 @@ function Seat(props) {
   const { seat, id, name, availability, selected, changeColor } = props
   return (
     <div
-      //style={selected.includes(id) ? { backgroundColor: '#1AAE9E' } : null}
-      style={!availability ? { backgroundColor: '#FBE192' } : null}
+      style={
+        selected.includes(id)
+          ? { backgroundColor: '#1AAE9E' }
+          : !availability
+          ? { backgroundColor: '#FBE192' }
+          : null
+      }
       onClick={() => changeColor(seat)}
     >
       <p>{name}</p>
@@ -18,12 +23,13 @@ function Seat(props) {
   )
 }
 
-export default function Seats() {
+export default function Seats({setAllInfo, allInfo}) {
   const [seats, setSeats] = useState([])
   const [selected, setSelected] = useState([])
+  const [seatNumber, setSeatNumber] = useState([])
+
 
   function changeColor(seatClicked) {
-    console.log(seatClicked)
     if (!seatClicked.isAvailable) {
       alert('Esse assento não está disponível')
       return
@@ -32,11 +38,21 @@ export default function Seats() {
     if (selected.includes(seatClicked.id)) {
       const clicked = selected.filter(id => id !== seatClicked.id)
       setSelected(clicked)
+    }
+
+    if (seatNumber.includes(seatClicked.name)) {
+      const clicked = seatNumber.filter(id => id !== seatClicked.name)
+      setSeatNumber(clicked)
+      setAllInfo({...allInfo, seats: clicked})
       return
     }
 
+    setAllInfo({...allInfo, seats: [...seatNumber, seatClicked.name ]})
     setSelected([...selected, seatClicked.id])
+    setSeatNumber([...seatNumber, seatClicked.name ])
   }
+
+  console.log('informações', allInfo)
 
   const { idSessao } = useParams()
 
@@ -45,9 +61,12 @@ export default function Seats() {
       `https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`
     )
 
-    promise.then(res => setSeats(res.data))
+    promise.then((res) => {setSeats(res.data)
+    setAllInfo({...allInfo, movie: res.data.movie.title, day: res.data.day.date, time: res.data.name})})
     promise.catch(err => console.log(err))
   }, [])
+
+  console.log(seats)
 
   return (
     <>
@@ -83,12 +102,17 @@ export default function Seats() {
           </div>
         </SeatsInfos>
 
-        <PurchaserInfo />
+        <PurchaserInfo
+          seatsId={selected}
+          allInfo={allInfo}
+          setAllInfo={setAllInfo}
+
+        />
       </SeatsContainer>
       {seats.movie ? (
         <Footer
           sections={seats.movie}
-          hourday={seats.name}
+          hourDay={seats.name}
           weekday={seats.day.weekday}
         />
       ) : (

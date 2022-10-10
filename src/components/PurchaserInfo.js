@@ -1,11 +1,23 @@
-import styled from "styled-components"
-import { Link, useParams } from 'react-router-dom'
+import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 
-export default function PurchaserInfo() {
+export default function PurchaserInfo(props) {
+  const {
+    seatsId,
+    allInfo,
+    setAllInfo
+  } = props
   const [name, setUserName] = useState('')
   const [cpf, setCpf] = useState('')
+  let navigate = useNavigate()
+
+  function success() {
+    setAllInfo({ ...allInfo, cpf: cpf, name: name })
+    console.log(allInfo)
+    navigate('/sucesso')
+  }
 
   function toReserve(e) {
     e.preventDefault()
@@ -13,45 +25,47 @@ export default function PurchaserInfo() {
     const requisition = axios.post(
       'https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many',
       {
-        ids: [1, 2, 3],
-        name: 'Fulano',
-        cpf: '12345678900'
+        ids: { seatsId },
+        name: { name },
+        cpf: { cpf }
       }
     )
+
+    requisition.then(success)
+    requisition.catch(res => console.log(res.data))
   }
 
   return (
     <form onSubmit={toReserve}>
-    <Inputs>
-      <div>
-        <p>Nome do comprador:</p>
-        <input
-          type="text"
-          value={name}
-          onChange={e => setUserName(e.target.value)}
-          placeholder="Digite seu nome..."
-          required
-        />
-      </div>
-      <div>
-        <p>CPF do comprador:</p>
-        <input
-          type="text"
-          value={cpf}
-          onChange={e => setCpf(e.target.value)}
-          placeholder="Digite seu CPF..."
-          required
-        />
-      </div>
-      <Link to="/sucesso">
+      <Inputs>
+        <div>
+          <p>Nome do comprador:</p>
+          <input
+            type="text"
+            value={name}
+            onChange={e => setUserName(e.target.value)}
+            placeholder="Digite seu nome..."
+            required
+          />
+        </div>
+        <div>
+          <p>CPF do comprador:</p>
+          <input
+            type="text"
+            value={cpf}
+            onChange={e => setCpf(e.target.value)}
+            placeholder="Digite seu CPF..."
+            required
+          />
+        </div>
+
         <Button type="submit" name="submit">
           <p>Reservar assento(s)</p>
         </Button>
-      </Link>
-    </Inputs>
-  </form>
+      </Inputs>
+    </form>
   )
-};
+}
 
 const Inputs = styled.div`
   display: flex;

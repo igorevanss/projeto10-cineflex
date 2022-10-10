@@ -8,7 +8,6 @@ export default function Sections() {
 
 
   const [sections, setSections] = useState([])
-
   const {idFilme} =useParams()
   
   useEffect(() => {

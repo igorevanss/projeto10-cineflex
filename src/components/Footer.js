@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import Sections from './Sections'
 
-export default function Footer({ sections, hourday, weekday }) {
+export default function Footer({ sections, hourDay, weekday }) {
   return (
     <FooterContainer>
       <div>
@@ -9,9 +8,9 @@ export default function Footer({ sections, hourday, weekday }) {
       </div>
       <div>
         <p>{sections.title}</p>
-        {hourday ? (
+        {hourDay ? (
           <p>
-            {weekday} - {hourday}
+            {weekday} - {hourDay}
           </p>
         ) : (
           ''
